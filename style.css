@@ -1,0 +1,96 @@
+/* Default styles for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1.05em;
+    font-family: "Times New Roman", Times, serif;
+}
+
+/* Dark mode styles */
+:root {
+    --text-color: #f5f5f5;
+    --background-color: #333333;
+    --table-border-color: #000000;
+    --table-header-bg-color: #484848;
+    --table-row-bg-color: #404040;
+    --table-row-hover-bg-color: #494949;
+    --button-bg-color: #404040;
+    --button-text-color: #f5f5f5;
+    --button-border-color: #484848;
+    --button-hover-bg-color: #666666;
+}
+body {
+    background-color: var(--background-color);
+    overflow-x: hidden;
+}
+
+/* Table container */
+.table-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* Table styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    color: var(--text-color);
+}
+td,
+th {
+    border: 1px solid var(--table-border-color);
+    padding: 10px;
+    text-align: center;
+}
+
+/* Table header style */
+th {
+    background-color: var(--table-header-bg-color);
+    font-weight: 600;
+}
+
+/* Alternate row style */
+tr:nth-child(even) {
+    background-color: var(--table-row-bg-color);
+}
+
+/* Table hover effect */
+tr:hover {
+    background-color: var(--table-row-hover-bg-color);
+}
+
+/* Buttons */
+.button {
+    background-color: var(--button-bg-color);
+    border: 0.1em solid var(--button-border-color);
+    border-radius: 0.8em;
+    margin-bottom: 0.1em;
+    color: var(--button-text-color);
+    cursor: pointer;
+    font-size: 0.5em;
+    text-align: center;
+    padding: 0.8em;
+    font-size: 0.7em;
+    text-decoration: none #0d172a solid;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+.hide {
+    opacity: 0;
+}

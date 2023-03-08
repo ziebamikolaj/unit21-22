@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="./style.css" />
+        <title>Unit 21-22</title>
+    </head>
+    <body>
+        <div class="table-container">
+            <table id="unit2122-table">
+                <thead>
+                    <tr id="headrow">
+                        <th>Polish</th>
+                        <th>English</th>
+                        <th class="button-container">
+                            <button class="button" id="show-all-button">
+                                Show all
+                            </button>
+                            <button class="button" id="reset-button">
+                                Reset
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="unit2122-body"></tbody>
+            </table>
+        </div>
+
+        <script>
+            const tableBody = document.querySelector("#unit2122-body");
+            const showAllButton = document.querySelector("#show-all-button");
+
+            showAllButton.addEventListener("click", () => {
+                const rows = tableBody.querySelectorAll("tr");
+                rows.forEach((row) => {
+                    const cells = row.querySelectorAll("td");
+                    cells.forEach((cell) => {
+                        cell.classList.remove("hide");
+                    });
+                });
+            });
+            
+            function createTableRow(verb) {
+                const row = document.createElement("tr");
+                const pol = document.createElement("td");
+                const en = document.createElement("td");
+                const button = document.createElement("td");
+                const showButton = document.createElement("button");
+
+                pol.textContent = verb.pol;
+                en.textContent = verb.en;
+
+                showButton.textContent = "Show";
+                showButton.classList.add("button");
+
+                const cells = [pol, en];
+                const randomIndex = Math.floor(Math.random() * cells.length);
+
+                cells.forEach((cell, index) => {
+                    if (index !== randomIndex) {
+                        cell.classList.add("hide");
+                    }
+                    showButton.addEventListener("click", () => {
+                        cells.forEach((cell) => cell.classList.remove("hide"));
+                    });
+                });
+
+                button.appendChild(showButton);
+                row.appendChild(pol);
+                row.appendChild(en);
+                row.appendChild(button);
+
+                return row;
+            }
+
+            const resetButton = document.querySelector("#reset-button");
+            resetButton.addEventListener("click", () => {
+                const rows = tableBody.querySelectorAll("tr");
+                rows.forEach((row) => {
+                    const cells = row.querySelectorAll("td");
+                    cells.forEach((cell) => {
+                        if (cell.querySelector("button")) {
+                            // check if the cell contains a button
+                            return;
+                        }
+                        cell.classList.add("hide");
+                    });
+                    const randomIndex = Math.floor(
+                        Math.random() * (cells.length - 1)
+                    );
+                    cells[randomIndex].classList.remove("hide");
+                });
+            });
+
+            fetch("unit2122.json")
+                .then((response) => response.json())
+                .then((irregularVerbs) => {
+                    irregularVerbs.forEach((verb) => {
+                        const row = createTableRow(verb);
+                        tableBody.appendChild(row);
+                    });
+                });
+        </script>
+    </body>
+</html>
